@@ -1,0 +1,518 @@
+\documentclass{AIAA}
+%\usepackage{amsmath}
+\usepackage{mathrsfs}
+%\usepackage{array}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{color}
+%\bibliographystyle{plainnat}
+\begin{document}
+
+\title{Control of crossflow instability over a swept wing using DBD plasma actuators}
+
+\author{Zhefu Wang\footnote{Phd Candidate, School of aerospace engineering, Tsinghua University, wangzf13@mails.tsinghua.edu.cn, and AIAA student member.} and Song Fu\footnote{Professor, School of aerospace engineering, Tsinghua University, fs-dem@tsinghua.edu.cn, and AIAA member.}}
+\affiliation{Tsinghua University, Beijing, P.R.China, 100084}
+%\author{Third C. Author\footnote{Insert Job Title, Department Name, Address/Mail Stop, and AIAA Member Grade (if any) for third author.}}
+%\affiliation{Business or Academic Affiliation 2, City, Province, Zip Code, Country}
+%\author{Fourth D. Author\footnote{Insert Job Title, Department Name, Address/Mail Stop, and AIAA Member Grade (if any) for fourth author (etc.).}}
+%\affiliation{Business or Academic Affiliation 2, City, State, Zip Code}
+
+\begin{abstract}
+%These instructions give you guidelines for preparing papers for AIAA Technical Journals. Use this document as a template if you are using Microsoft Word 2001 or later for Windows, or Word X or later for Mac OS X. Otherwise, use this document as an instruction set. If you previously prepared an AIAA Conference Paper using the Papers Template, you may submit your journal paper in that format with one exception: after you have entered all of your text and figures into the table, be sure to double space your paper before submitting it to WriteTrack$\texttrademark $. Carefully follow the journal paper submission process in Sec. II of this document. Keep in mind that the electronic file you submit will be formatted further at AIAA. This first paragraph is formatted in the abstract style. Abstracts are required \textit{only} for regular, full-length papers. Be sure to define all symbols used in the abstract, and do not cite references in this section. The footnote on the first page should list the Job Title and AIAA Member Grade (if applicable) for each author.
+{\color{red} Waiting to be completed......
+Nonlinear parabolized stability equations are used to provide a computational assessment of potential use of plasma actuators for transition delay on a swept wing. The inflection point on the velocity profile perpendicular to the inviscid streamline has known to be the source of the instability that finally causes the laminar/turbulent transition in many cases.}
+\end{abstract}
+
+\maketitle
+
+\section*{Nomenclature}
+(Nomenclature entries should have the units identified)\\
+\noindent\begin{tabular}{@{}lcl@{}}
+X,Y,Z                 &=& Orthogonal curvilinear coordinates \\
+$x,y,z$               &=& Orthogonal curvilinear coordinates, in millimeters \\
+$u,v,w$               &=& Total velocity component in X,Y,Z directions \\
+$u_0,v_0,w_0$         &=& Baseflow velocity component in X,Y,Z directions \\
+$\rho$                &=& Total density \\
+$T$                   &=& Total temperature \\
+$u',v',w'$            &=& Disturbance velocity component in X,Y,Z directions \\
+$\mathbf{q}$          &=& The vector that consists of total density, velocity and temperature \\
+$\mathbf{q_0}$        &=& The vector that consists of baseflow quantities \\
+$\mathbf{\tilde{q}}$  &=& The vector that consists of disturbance quantities \\
+\end{tabular} \\
+
+%\section{Abstract}
+
+
+\section{Introduction}
+The turbulent friction drag constitutes more than half of the total aircraft drag \cite{Schrauf2005}. Laminar Flow Control (LFC) technology, which extends the low-friction laminar region, holds great potential to reduce the drag and it draws a lot of attentions nowadays. Here, a new LFC technology, which intends to delay the transition induced by crossflow instability over a swept wing, is studied using parabolized stability equations.
+
+The boundary layer over the swept wing is subject to the crossflow instability which stems from the inflection point on the crssflow velocity profile \cite{Saric2003}. This instability leads to both stationary modes and traveling modes. These modes come from different external perturbations and different receptivity processes. Stationary modes with zero frequency are highly receptive to surface roughness. While, Traveling modes are usually excited by the free stream turbulence \cite{Schrader2008}. Under the low turbulence level condition, the transition always dominated by stationary modes, otherwise, the transition is triggered by traveling modes \cite{Bipps1999}. Here, we only focus on those stationary modes, since at cruise conditions, the turbulence level is very low. Steady modes appear as co-rotating crossflow vortices whose axes are roughly aligned with the inviscid stream line. In nature transition process, these modes with small initial amplitudes grow exponentially at the beginning. When the modes' amplitudes reach a high level, the disturbance velocities, $v'$ and $w'$, result in a strong convection of the high-momentum fluid towards the wall and the low-momentum fluid away from the wall. This convection also leads to the modes' amplitude saturation. The saturate crossflow vortices are characterized by the rollover seen in the streamwise-velocity contours \cite{Malik1994,Haynes2000}. Subsequently, the boundary layer is substantially distorted by these vortices and then, strong shear layers appear. Riding on the modified boundary layer, the `explosive' secondary instability mechanism finally triggers the vortex breakdown and leads the flow to turbulence \cite{White2005}. %The secondary instability modes are classified into two families by Malik \cite{Malik1999}. One mode is associated with wall-normal shear and it is called 'y' mode. The other connected to the spanwise shear is called 'z' mode. Malik also proposed a new eN method based on the amplification rate of the most unstable secondary modes to predict the transition location. It is much more reliable than the old one based on the linear growth rate of the primary instability modes.
+Qualitatively, a smaller amplitude of primary crossflow mode implies a weaker secondary instability, which also means a delay of the transition \cite{Li2015a}. Thus, the effectiveness of the plasma control method is evaluated in terms of the energy of primary instability crossflow modes resolved with parabolized stability equations.
+
+Considerable efforts have been made to damp crossflow instability and to delay the transition on swept wings. The most famous one was proposed by Saric \cite{Saric1998}. They installed discrete roughness elements(DREs) near the leading edge to excite the subdominant crossflow mode. In their experiment, the naturally most unstable mode was suppressed in the presence of the subdominant mode. So far, substantial experimental and computational studies focus on this concept had been carried out \cite{Malik1999,Haynes2000,Wassermann2002,Carpenter2008,LiFei2011,Hosseini2013,Li2015a}. Besides, there is another control concept called base-flow manipulation, proposed by D\"orr and Kloker \cite{dorr2015stabilisation}. They installed plasma actuators on a swept flat plate to modify the crossflow and successfully weakened the crossflow instability. In present study, plasma actuators were used to achieve a combined effect of these two concepts.
+
+Many numerical methods have been developed to investigate the instability and transition process. Direct Numerical Simulation (DNS) had been successively applied to study crossflow instability\cite{Wassermann2005,Bonfigli2007,Duan2013,Hosseini2013}. However, it requires substantial computational resources. An alternative approach is to apply  Linear Stability Theory (LST) for the study. The conventional linear local stability analysis assumes a simple  disturbance and converts the governing equations into a eigenvalue problem. A monograph on this theory had been given by Mack\cite{Mack1984}. Since the locally parallel flow assumption is adopted, the growth of the boundary-layer  is thus neglected  and, to some extent, the  accuracy of disturbance growth rate is inaccurate. To overcome this disadvantage,  Parabolized Stability Equation (PSE) was developed by Herbert\cite{Herbert1987,Herbert1997,Herbert1993}. Bertolotti \cite{Bertolotti1991,Bertolotti1992} applied this method to study the evolution of Tollmien-Schlichting(T-S) wave in the Blasius boundary layer and the results agreed well with DNS. The nonlinearity can also be incorporated in the frame of PSE\cite{Hein2005}. With the consideration of nonlinear effect, the secondary instability and even the vortex breakdown in the three dimensional boundary layer can be simulated with PSE\cite{LiFei2011,Li2015a}. The detailed mathematic formulation of PSE will be given in Section \ref{sec:formulation}.
+
+Dielectric-Barrier-Discharge (DBD) plasma actuators are purely electric devices which can manipulate the dynamics of different flows. These kind of actuators have led to much interest for flow control applications since they are flush mountable, do not have moving parts and can be rapidly activated on demand. DBD actuators have already demonstrated their authority to control flow seperation \cite{Little2010,Mclaughlin2006,Benard2011,Kelley2012,Schneck2014,Jukes2009}, enhance jet mixing \cite{Benard2008} and reduce noise \cite{Thomas2008}. Besides, many successful attempts of transition delay with DBD plasma actuators have been achieved. Riherd and Roy \cite{Riherd2013} found that flow-wise oriented momentum injection caused by plasma actuators in the boundary layer could damp Tollmien-Schlichting (TS) waves. The similar phenomenon was also observed in experiment \cite{Duchmann2014,Grundmann2007a}. Another promising application is the cancellation of TS waves\cite{Grundmann2008,Kurz2014,Kotsonis2013}. It found that the amplitude of TS wave was reduced in the presence of an anti-phase oscillation induced by plasma actuators. In addition of controlling TS wave, plasma actuators also were employed to negate transient growth and delay the corresponding laminar/turbulence transition. Hanson et al. \cite{Hanson2010,Hanson2014} used an spanwise array of symmetric plasma actuators, which were capable of generating spanwise-periodic counter-rotating vortices, to delay the bypass transition triggered by roughness elements located at the leading edge of a flat plate.
+
+Compared to the large amount of literatures on 2-D boundary layer laminar flow control with plasma, works on 3-D boundary layer plasma control are rare. Schuele et al. \cite{schuele2013control} employed plasma actuators as active roughness to excite subcritical crossflow instability mode, which could attenuate the naturally most unstable modes, in the supersonic boundary layer over a sharp-tipped cone with $4.2^{\circ}$ angle of attack. In this field, another pioneers are D\"orr and Kloker. Besides their base flow manipulation concept mentioned previously, they also successfully canceled the crssflow vortices with one actuator per spanwise wave length of the most unstable mode and delayed the transition again \cite{dorr2016}. In present study, a similar concept was also implemented on a swept wing, rather than the swept flat plat with favorable pressure gradient%, which was employed in D\"orr and Kloker's investigation.
+ More detailed reviews of DBD plasma actuators can be found in Ref.\cite{Moreau2007,Corke2010,Benard2014}
+
+%Explain our control method and our PSE code.
+The objective of the present work is to investigate, numerically, the effects of plasma actuator on laminar-turbulent transition control in a three-dimensional boundary-layer over a swept wing using NPSE (Non-linear Parabolized Stability Equation) method. This paper is organized as follows: {\color{red}(waiting to be completed...)}
+
+
+\section{Formulations}\label{sec:formulation}
+\subsection{Plasma model}
+
+A DBD plasma actuator consists of two electrodes, one is exposed in the air and another is buried under a layer of dielectric. When a radio-frequency high voltage applied between the two electrodes, strong unsteady electric field and weak ionized plasma is generated near the electrodes. The electric field drives the plasma and gives them additional momentum. This momentum will finally transfer into the air and create the so called ``electrical wind''. The first principles models\cite{Likhanskii2008,Boeuf2007,Jayaramen2008} can capture detailed dynamics of the discharge process and provide the unsteady body force distribution. However, these models need substantial computational resources. An alternative is to employee the steady body force model. Normally, the operating frequencies of the plasma actuators are in order of several kHz, which are much higher than the frequency of unsteady crossflow instability modes and therefore the produced disturbance with high frequencies will damped out soon by the boundary layer\cite{dorr2015stabilisation}. Hence, the unsteady effect can be ignore in the simulation. Here we use the model proposed by Maden et al.\cite{Maden2013}(referred as Maden's model in the following). This model was fully validated in their paper and was also utilized by D\"orr and Kloker \cite{dorr2015stabilisation,dorr2016}.
+
+In Maden's model, the wall-normal component of the body force is neglected because it is too small compared to the wall-parallel component. The distribution of the wall-parallel component is as follows:
+\begin{equation}
+    \label{e:madenX}
+    X(x)=(a_1x+a_2x^2){\rm exp}(-a_0(x-x_{\rm PA})),x>x_{\rm PA}
+\end{equation}
+\begin{equation}
+    \label{e:madenY}
+    Y(y)=(b_1x+b_2x^2){\rm exp}(-b_0y^{2/5}),y>0
+\end{equation}
+\begin{equation}
+    \label{e:maden}
+    f(x,y)=c_{\rm force}X(x)Y(y)
+\end{equation}
+Here, the constants $a_0,a_1,a_2,b_0,b_1,b_2,c_{\rm force}$ can be adapted to define the desired force distribution. The $f(x,y)$ in Eq.(\ref{e:maden}) is dimensionless. The corresponding dimensional force can be calculated:
+\begin{equation}
+    f^*(x,y)=f(x,y)\frac{\rho_{\rm reff}U_{\rm reff}}{\delta_{0}}
+\end{equation}
+$\rho_{\rm reff},U_{\rm reff},\delta_{0}$ are reference density, velocity and length, respectively. Since Maden's model is a two dimensional model, for the three-dimensional case , the distribution, $f(x,y)$, is extruded along the lateral electrode axis, yielding the three-dimensional distribution $f(x,y,z)$.
+\subsection{Non-linear parabolized stability equation}
+The non-linear parabolized stability equations are employed in this study to investigate how the plasma actuators affect the evolution of disturbance in a swept wing boundary layer. First, the treatment of plasma-induced body force is introduced. For clarity, the Navier-Stokes equation is denoted as:
+\begin{equation}
+    \label{e:NS}
+    \mathscr{N}(\mathbf{q})=0
+\end{equation}
+The vector $\mathbf{q}=(\rho , u,v,w,T)^T$ consists of the original flow field quantities describing the density, velocity and temperature. To achieve the stability equation, the baseflow equation should be subtracted from the original N-S equation, Eq.~(\ref{e:NS}). Undoubtedly, the baseflow also satisfies the N-S equations:
+\begin{equation}
+    \label{e:baseflow}
+    \mathscr{N}(\mathbf{q_0})=0
+\end{equation}
+$\mathbf{q_0}$ is the baseflow vector made up of baseflow quantities. Then we define the disturbance vector: $\mathbf{\tilde{q}}=\mathbf{q}-\mathbf{q_0}$. Let Eq.~(\ref{e:NS}) - Eq.~(\ref{e:baseflow}), we get the governing equation of disturbance quantities:
+\begin{equation}
+    \label{e:disturbance1}
+    \mathscr{S}(\mathbf{\tilde{q}})=\mathscr{N}(\mathbf{q_0}+\mathbf{\tilde{q}})-\mathscr{N}(\mathbf{q_0})=0
+\end{equation}
+When the additional body force induced by plasma actuators is imposed on the fluid, the total governing equation becomes:
+\begin{equation}
+    \label{e:NSf}
+    \mathscr{N}(\mathbf{q})=\mathbf{f}
+\end{equation}
+Here, $\mathbf{f}$ is the source term caused by the body force. Let ~(\ref{e:NSf}) -~(\ref{e:baseflow}), then we get the new stability equation including the body force:
+\begin{equation}
+    \label{e:disturbance2}
+    \mathscr{S}(\mathbf{\tilde{q}})=\mathscr{N}(\mathbf{q_0}+\mathbf{\tilde{q}})-\mathscr{N}(\mathbf{q_0})=\mathbf{f}
+\end{equation}
+The assumption, that the body force only alters the disturbance evolution while the baseflow remains the same, is utilized here because the force term is very small and has the same order of magnitude with the nonlinear term in the PSE computation. This assumption was also utilized by Riherd and Roy \cite{Riherd2013} in their research about damping Tollmien-Schlichting wave with plasma actuators. There is no doubt that the body force effect can be considered in the baseflow equation\cite{Brandt2011,Marquet2008,Giannetti2007}. However, considering the computational resource cost, it's more economy to add the force term in the stability equation, because in the present study the baseflow, boundary layer over a infinity swept wing, is quasi-two-dimensional, but the body force induced by the plasma is three-dimensional. More specifically, the force is periodical in spanwise direction. If the force term was added in the baseflow equation rather than the stability equation, then the baseflow would become three dimensional. In that way, the 3D PSE should be adopted to resolve the evolution of the disturbance in the boundary layer. That would be a very costly task. Therefore, the periodical body force is absorbed into the stability equation and the baseflow remains unchanged. The new stability equation can be casted into the following compact and dimensionless form:
+\begin{equation}
+ \label{e:disturbanceEq}
+ {\mathbf{\Gamma }}\frac{{\partial {\mathbf{\tilde q}}}}
+ {{\partial t}} + {\mathbf{A}}\frac{{\partial {\mathbf{\tilde q}}}}
+ {{\partial x}} + {\mathbf{B}}\frac{{\partial {\mathbf{\tilde q}}}}
+ {{\partial y}} + {\mathbf{C}}\frac{{\partial {\mathbf{\tilde q}}}}
+ {{\partial z}} + {\mathbf{D\tilde q}} = {\mathbf{H}}_{xx} \frac{{\partial ^2 {\mathbf{\tilde q}}}}
+ {{\partial x^2 }} + {\mathbf{H}}_{yz} \frac{{\partial ^2 {\mathbf{\tilde q}}}}
+ {{\partial z\partial y}} + {\mathbf{H}}_{xy} \frac{{\partial ^2 {\mathbf{\tilde q}}}}
+ {{\partial x\partial y}} + {\mathbf{H}}_{xz} \frac{{\partial ^2 {\mathbf{\tilde q}}}}
+ {{\partial x\partial z}} + {\mathbf{H}}_{yy} \frac{{\partial ^2 {\mathbf{\tilde q}}}}
+ {{\partial y^2 }} + {\mathbf{H}}_{zz} \frac{{\partial ^2 {\mathbf{\tilde q}}}}
+ {{\partial z^2 }} + {\mathbf{N}} + {\mathbf{F}}
+\end{equation}
+${\mathbf{\Gamma }},{\mathbf{A}},{\mathbf{B}},{\mathbf{C}},{\mathbf{D}},{\mathbf{H}}_{xx} ,{\mathbf{H}}_{yz} ,{\mathbf{H}}_{xy} ,{\mathbf{H}}_{xz} ,{\mathbf{H}}_{yy} ,{\mathbf{H}}_{zz}$ are all 5$\times$5 coefficient matrices and functions of Reynolds, Mach, Prandtl numbers, as well as unperturbed base flow quantities. ${\mathbf{N}}$ is the non-linear term and ${\mathbf{F}}$ the body force term. Both are 5 dimension vectors. The disturbance, non-linear term and body force term are all expressed by truncated Fourier series as follows:
+\begin{equation}
+\label{e:Fourier1}
+    {\mathbf{\tilde q}}\left( {x,y,z,t} \right) = \sum\limits_{m =  - M}^M {\sum\limits_{n =  - N}^N {{\mathbf{\hat q}}_{mn} \left( {x,y} \right)\Theta _{mn} } }
+\end{equation}
+\begin{equation}
+\label{e:Fourier2}
+    {\mathbf{N}} + {\mathbf{F}} = \sum\limits_{m =  - M}^M {\sum\limits_{n =  - N}^N {{\mathbf{S}}_{mn} \left( {x,y} \right)\Theta _{mn} } }
+\end{equation}
+\begin{equation}
+\label{e:Fourier3}
+    \Theta _{mn}  = \exp \left( {i\int_{x_0 }^x {\alpha _{mn} \left( \xi  \right)d\xi }  + in\beta z - im\omega t} \right)
+\end{equation}
+Here, $\beta$ and $\omega$ are the fundamental spanwise wave number and the fundamental circular frequency, respectively; $m,n$  the Fourier index of harmonic modes and $\alpha_{mn}$  the complex streamwise wave number of mode $(m,n)$. It should be noted that $\omega=0$ corresponds to the steady modes. $\mathbf{\hat q}_{mn} \left( {x,y} \right)$ is the so called shape function and it has 5 components, namely $\hat\rho, \hat u, \hat v, \hat w$ and $\hat T$ corresponding to the density, velocities and temperature, respectively. $\mathbf{S}_{mn}$ represents the total source term including the nonlinear term and  body forces. Note that the disturbance could also take a simple wave-like form: ${\mathbf{\tilde q}}\left( {x,y,z,t} \right) = \mathbf{\hat q}(y){\rm exp} [{\rm i}(\alpha x+\beta z -\omega t)]$. With parallel flow  and linearity assumptions, it leads to a set of ordinary differential equations which can be solved as an eigenvalue problem in LST\cite{Mack1984}. LST is also applied to obtain the initial conditions for PSE solution in the present work.
+
+Substituting Eqs.~(\ref{e:Fourier1}) and~(\ref{e:Fourier2}) with Eq.~(\ref{e:disturbanceEq}.), the governing equation of the shape functions of the Fourier mode $(m,n)$ can be expressed as the following:
+\begin{equation}
+\label{e:unPSE}
+    {\mathbf{\hat A}}\frac{{\partial {\mathbf{\hat q}}_{mn} }}{{\partial x}}
+  + {\mathbf{\hat B}}\frac{{\partial {\mathbf{\hat q}}_{mn} }}{{\partial y}}
+  + {\mathbf{\hat C}}\frac{{\partial^2 {\mathbf{\hat q}}_{mn} }}{{\partial x^2}}
+  + {\mathbf{\hat D\hat q}}_{mn}
+  - {\mathbf{H}}_{yy}\frac{{\partial ^2 {\mathbf{\hat q}}_{mn} }}{{\partial y^2 }}
+  = {\mathbf{S}}_{mn}
+\end{equation}
+Here, Matrix ${\mathbf{\hat A}},{\mathbf{\hat B}},{\mathbf{\hat C}},{\mathbf{\hat D}}$ are given by:
+\begin{equation}
+\begin{gathered}
+  \mathbf{\hat A}  = {\mathbf{A}} - 2{\rm i}\alpha_{mn}{\mathbf{H}}_{xx} - {\rm i}n\beta{\mathbf{H}}_{xz}  \hfill \\
+  \mathbf{\hat B}  = {\mathbf{B}} -  {\rm i}\alpha_{mn}{\mathbf{H}}_{xy} - {\rm i}n\beta{\mathbf{H}}_{yz}   \hfill \\
+  \mathbf{\hat C}  = {\mathbf{H}}_{xx} \hfill \\
+  \mathbf{\hat D}  = {\mathbf{D}} - {\rm i}m\omega {\mathbf{\Gamma }} + {\rm i}\alpha_{mn} {\mathbf{A}} + {\rm i}n\beta {\mathbf{C}} + {\mathbf{H}}_{xx} \left( {\alpha_{mn}^2  - {\rm i}\frac{{d\alpha }}{dx}} \right) + n^2\beta ^2 {\mathbf{H}}_{zz} + n\beta\alpha_{mn}{\mathbf{H}}_{xz} \hfill \\
+\end{gathered}
+\end{equation}
+Following Malik et al.\cite{Malik1999}, the small term ${{d\alpha }}/{dx}$ is neglected. To avoid the ambiguity in the choice of streamwise wave number, $\alpha$, the auxiliary condition is adopted as follows:
+\begin{equation}
+\label{e:auxiliary}
+    \int_0^\infty  {{\mathbf{\hat q}}^H {\mathbf{M}}\frac{{\partial {\mathbf{\hat q}}}}{{\partial x}}dy}  = 0,\forall x
+\end{equation}
+Here, $\mathbf{M}=diag(0,1,1,1,0)$ and the superscript ``$H$'' denotes the complex conjugate transpose. With this auxiliary condition Eq.~(\ref{e:auxiliary}), the variation of $\mathbf{\hat q}$ with $x$ is minimized\cite{Malik1994} which allows the approximation ${{\partial ^2 {\mathbf{\hat q}}_{mn} }}/{{\partial x^2 }}=0$. However, even with the secondary derivatives with respect to $x$ being neglected, Eq.~(\ref{e:unPSE}) is still not parabolic. According to Li and Malik\cite{LiMalik1996}, to remove the residual ellipticity, the pressure gradient term should be modified as follows:
+\begin{equation}
+    \frac{\partial \tilde p_{mn}}{\partial x} = {\rm i}\alpha_{mn}\hat p_{mn}\Theta_{mn}
+\end{equation}
+With these modifications shown above, the final PSEs become the following form:
+\begin{equation}
+\label{PSE1}
+    \mathscr{L}{\mathbf{\hat q}}_{mn}  = {\mathbf{\hat A}}\frac{{\partial {\mathbf{\hat q}}_{mn} }}
+    {{\partial x}} + {\mathbf{\hat B}}\frac{{\partial {\mathbf{\hat q}}_{mn} }}
+    {{\partial y}} + {\mathbf{\hat D\hat q}}_{mn}  - {\mathbf{H}}_{yy} \frac{{\partial ^2 {\mathbf{\hat q}}_{mn} }}
+    {{\partial y^2 }} = {\mathbf{S}}_{mn}
+\end{equation}
+Here $\mathscr{L}$ stands for the linear PSE operator. Now, Eq.~(\ref{PSE1}) can be solved with a marching scheme. The streamwise and wall-normal derivatives are discretized with an implicit Euler scheme and a fourth-order-accurate central difference scheme, respectively. Readers can refer to Ren's paper\cite{Ren2014a,Ren2014b,Ren2014c,Ren2015,Ren2016} for more details.
+%\begin{equation}
+%\begin{aligned}
+%    {\mathbf{\hat A}} =& {\mathbf{A}} - 2i{\mathbf{H}}_{xx} \alpha _{mn}  - in\beta {\mathbf{H}}_{xz} \\
+%    {\mathbf{\hat B}} =& {\mathbf{B}} - i{\mathbf{H}}_{xy} \alpha _{mn}  - in\beta {\mathbf{H}}_{yz}  \\
+%    {\mathbf{\hat D}} =& {\mathbf{D}} - i\Gamma m\omega  + i{\mathbf{A}}\alpha _{mn}  + i{\mathbf{C}}\beta n +\\
+%    &  {\mathbf{H}}_{xx} \left( {\alpha _{mn} ^2  - i\frac{{d\alpha _{mn} }}{{dx}}} \right) + n\beta {\mathbf{H}}_{xz} \alpha _{mn}  + \beta ^2 n^2 {\mathbf{H}}_{zz} \\
+%\end{aligned}
+%\end{equation}
+
+
+
+\section{Results and discussion}
+The flow configuration of the baseline case is identical to the experiment conducted in Tsinghua University. The airfoil is NLF-0415 and the swept angle is $45^\circ$. The angle of attack is $-4^\circ$. The cord length of the airfoil is 1.2m, installed in a $1.2{\rm m}\times1.2{\rm m}$ wind tunnel. The experiment showed that when the free stream velocity was 22.3m/s, laminar-turbulent transition occurred at nearly 50\% cord length. To test the plasma control method, the free stream velocity is doubled to 44.5m/s in order to make the transition happen more upstream in the following computation. The code with high precision Correction Procedure via Reconstruction(CPR)\cite{WangZJ2009} scheme was used to resolve the invicid flow field. The computed invicid stream velocities on the wall and the experimentally measured velocities at the edge of the boundary layer are compared in Fig~\ref{f:ConpareInvicidV}. The black line is obtained from the computation and the 3 red dots is experimental data. They show good agreement. Then, computational obtained flow quantities over the upper surface of the wing were adopted as the boundary conditions of the boundary layer equation and the resolved velocity profiles at 20\% and 40\% cord length, where is still laminar mentioned previously, are compared with experimental results in Fig~\ref{f:compare_profiles}. Again, the lines are from the computation and the dots from experiment. The correspondence demonstrates the present base flow computation code is reliable.
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.8\textwidth]{compare_UexpOUT_laminarcase}
+\caption{Comparison of computational and experimental $\rm{U_{wt}}$ at the edge of the boundary layer}
+\label{f:ConpareInvicidV}
+\end{figure}
+
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.6\textwidth]{compare_profiles}
+\caption{Comparison of computational and experimental $\rm{U_{wt}}$ profile at the X/C=0.4 and 0.2}
+\label{f:compare_profiles}
+\end{figure}
+\subsection{Baseline case and pressure gradient effect}
+In this subsection, the stability characteristic of the baseline case, in which DBD is not added, is investigated firstly. Reibert \cite{Reiberit1996} also studied the stability feature of this airfoil with the same swept angle and the same attack angle. (Their experiment will be referred as the Reibert's experiment in the following.) However, sizes of the wind tunnel and the wing model are both different and that leads to the different pressure coefficient distribution, shown in Fig.~\ref{f:CpCompare}. The pressure gradient in the Tsinghua University's (THU's) experiment is stronger than that in Reibert experiment because the ratios of wing tunnel size to the wing model size are slightly different. In THU's experiment, the flow accelerates faster. Since the consequence of this difference in pressure gradients is still unclear, four different computation cases are set up to investigate this effect. Two of them adopt the pressure coefficient distribution from Reibert's experiment and the free stream velocities are 22.3m/s and 44.5m/s. The others adopt THU's pressure coefficient distribution and the free stream velocities are still 22.3m/s and 44.5m/s. The velocities at the edge of the boundary layers and the displacement thicknesses of the boundary layers in these four case are shown in Fig.~\ref{fig:CompOutFlow}. It can be seen that in the case adopting THU's pressure coefficients, the inviscid stream velocity increases slowly near the leading edge. However, it accelerates fast in the middle section of the airfoil and surpasses the velocity with Reibert's pressure coefficient at nearly 30\% cord length. The boundary layers in THU's experiment are thicker than that in Reibert's, no matter in the 22.3m/s free stream cases or the 44.5m/s cases. The pressure reaches it's lowest value at nearly 70\% cord length. Hence, the boundary layers' thickness increase dramatically at that position.
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.8\textwidth]{compareCp_Reibert}
+  \caption{Pressure coefficient (Red: THU experiment; Blue: obtained from Reibert's dissertation\cite{Reiberit1996})}\label{f:CpCompare}
+\end{figure}
+\begin{figure}
+\centering
+\subfigure[]{           %
+\label{fig:CompOutFlow:a} %% label for first subfigure
+\includegraphics[width=0.48\linewidth]{compare-outflow3}}
+%\hspace{0.0in}
+\subfigure[]{
+\label{fig:CompOutFlow:b} %% label for second subfigure
+\includegraphics[width=0.48\linewidth]{DisplacementThickness-4(2)}}
+\caption{(a)Comparison of streamwise velocity at the edge of the boundary layer of different cases; (b) Comparison of boundary layer displacement thickness of different cases}
+\label{fig:CompOutFlow} %% label for entire figure
+\end{figure}
+\begin{figure}
+\centering
+\subfigure[$U_\infty=22.3m/s$]{           %
+\label{fig:CompCrossProfiles:a} %% label for first subfigure
+\includegraphics[width=0.48\linewidth]{compare223Wt(scaledUe)}}
+%\hspace{0.0in}
+\subfigure[$U_\infty=44.5m/s$]{
+\label{fig:CompCrossProfiles:b} %% label for second subfigure
+\includegraphics[width=0.48\linewidth]{compare445Wt(scaledUe)}}
+\caption{Comparison of crossflow profiles at different streamwise location}
+\label{fig:CompCrossProfiles} %% label for entire figure
+\end{figure}
+
+Fig.~\ref{fig:CompCrossProfiles} plots the crossflow velocity profiles at 20\%, 40\% and 60\% cord length. The crossflow velocity must vanish outside the boundary layer and the vanishing heights increase from 20\% to 60\% cord length in all cases due to the boundary layer growth. When the free stream velocities are the same, the peak values of crossflow velocities with THU's pressure coefficient are higher than that with Reibert's. That's mainly because at these three streamwise locations, THU's pressure gradients are all stronger than that of Reibert's. It's widely known that the crossflow forms due to the imbalance of the pressure gradient and the circular acceleration in the boundary layer. Stronger pressure gradient makes stronger imbalance and subsequent stronger crossflow. Hence, the difference in pressure gradient directly results in the difference of the crossflow intension, which is very important to the crossflow instability.
+
+The ${\rm e^N}$ method is employed to investigate the stability feature of all the four cases and the results are shown in Fig.~\ref{fig:CompN}. The N-value is defined as:
+\begin{equation}\label{e:eNdef}
+  N=\int_{x_0}^x -\alpha_idx
+\end{equation}
+Here, the $\alpha_i$ is the imaginary part of the streamwise wave number, which is computed using the local linear stability equation (LST). Its opposite number , $-\alpha_i$, indicates the spatial growth rate of the corresponding instability mode. $x_0$ is the position where the mode first became unstable. The envelops of the N-value, namely the maximum N-values of all steady modes at each streamwise location, are shown in Fig.~\ref{fig:CompN:a}. The blue curves stand for the cases with 44.5m/s free stream velocity and the red for the 22.5m/s free stream velocity. Curves with square symbols denotes the results with THU's pressure coefficient distribution and circles with Reibert's. It can be seen N-values from both cases with 44.5m/s free stream velocity are higher than the other two, since increasing the free stream velocity, equivalent to enhancing the Reynolds number, makes the flow more unstable. The figure also shows that under same free stream velocity, THU's pressure coefficient distribution always makes the flow less stable. Recalling the crossflow profile compared in Fig.~\ref{fig:CompCrossProfiles}, It can be found that the little reduction of the crossflow velocity leads to a big difference in the N-value. Since the mode's amplitude is calculated by $A=A_0e^{N}$($A_0$ is the initial amplitude), the effect on the amplitude will be more significant. The spanwise wave length of the most unstable modes, namely the modes have the biggest N-value at each streamwise locations, are shown in Fig.~\ref{fig:CompN:b}. There is no significant difference between the results adopting these two different pressure coefficient distributions. From the figures shown above, It can be concluded that stronger pressure gradient results in higher crossflow velocity and higher instability modes' growth rate. However, the spanwise wave length of the most unstable modes change slightly.
+\begin{figure}
+\centering
+\subfigure[]{           %
+\label{fig:CompN:a} %% label for first subfigure
+\includegraphics[width=0.48\linewidth]{compare-Nmax3}}
+%\hspace{0.0in}
+\subfigure[]{
+\label{fig:CompN:b} %% label for second subfigure
+\includegraphics[width=0.48\linewidth]{compare-lamda}}
+\caption{Comparison of (a) the maximum N value and (b) the corresponding modes' the spanwise wavelength at each streamwise location }
+\label{fig:CompN} %% label for entire figure
+\end{figure}
+
+The most unstable case, the one with THU's pressure coefficient and 44.5m/s free stream velocity, is chosen as the base line case to test the plasma control method. The free stream velocity, 44.5m/s is chosen as the reference velocity and all the velocities and their components are all scaled with it. Some instability analyses results will be shown in the rest part of this section. Fig.~\ref{fig:Nfactor445} shows the N-factors of steady modes with different spanwise wave number in the base line case. Commonly, the transition caused by crossflow instability happens at N=6. With this criterion, 4mm mode will trigger transition at 24\% cord length. However, with the polished leading edge and in the low turbulence environment, the critical N-factor can be greater than 14 \cite{saric2011}. In our case, no mode's N-factor achieves 14 before the pressure minimum. The mode with 4mm, 5mm and 6mm spanwise wavelength have the greatest N-factor successively and they are all promising candidate for the dominating mode. The 3mm mode grows fast near the leading edge and reaches the peak at 20\% cord length. After that it declines. The modes with 2mm and shorter spanwise wave length are always stable, so they are not shown in the figure. % The e$^{\rm N}$ method can only provide the amplification factor of instability modes. That is to say, it predicts how many times the mode is amplified with respect to its initial amplitude, the amplitude at the location where it start to became unstable. To calculate the physical modes' amplitude and find out the mode that dominates the transition, the initial amplitude should be determined. The receptivity analysis \cite{Meneghello2015,Tempelmann2012b,Tempelmann2012c,Schrader2008,Thomas2015} and directly numerical simulation can offer the initial amplitude. However, it's not the emphasis of this study. Therefore, we only focus on one possible situation in which all the modes' initial amplitudes are $5\times10^{-5}$ and that is enough to demonstrate the effectiveness of the plasma control method.
+The e$^{\rm N}$ method is based on the linear assumption. However, when the modes' amplitudes are big enough, like 10\% of the free stream velocity, the nonlinearity will affect the modes' evolution. Therefore, the nonlinear parabolized stability equation (NPSE) has to be employed to resolve the disturbance in the boundary layer. These promising modes predicted by the e$^{\rm N}$ method are seeded at the inlet and the initial amplitude of them are all $5\times10^{-5}$. The mode amplitude in NPSE computation is defined as
+\begin{equation}
+Amp={\rm exp}\left(\int_{x_0}^x -\alpha _id\xi\right){\rm max} \left(\sqrt{\left| \hat{u} \right|^2+\left| \hat{v} \right|^2+\left| \hat{w} \right|^2}\right)_y
+\end{equation}
+The amplitudes of primary modes as functions of streamwise coordinate are shown in Fig.~\ref{f:NPSE}. All the harmonics are excited by the nonlinearity and they are not show in the figure. The peak value of the 3mm mode's amplitude is nearly 1 order of magnitude less than the others. The 5mm mode first reaches the stationary platform. Therefore, the 5mm mode is chosen as the target mode and the following control methods are all aiming on this mode.
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=\textwidth]{Nvalue(1)}
+  \caption{N-factor of the case $U_\infty$=44.5m/s}%
+  \label{fig:Nfactor445}
+\end{figure}
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.48\textwidth]{CompareCsesVmax_Amp0=1e-4(ScaledWithLocalUout0_5)(1)} \includegraphics[width=0.48\textwidth]{CompareCsesVmax_Amp0=1e-4(ScaledWithLocalUout0_5)}
+  \caption{The amplitude of modes with different spanwise wavelength (NPSE results)}\label{f:NPSE}%
+\end{figure}
+
+\subsection{Control scheme 1: one actuator per wave length}\label{subs:control1}
+As mentioned previously, there are 7 constants, $a_0,a_1,a_2,b_0,b_1,b_2,c_{\rm force}$, need to be determined in the plasma model. D\"orr and Kloker noted that the body force should spread over the boundary layer but does not extend beyond the boundary-layer edge \cite{dorr2015stabilisation}. Figure \ref{f:BLvelocityprofile} shows the primary velocity profiles and the crossflow velocity profiles at streamwise location $X/C=0.15,0.2$ and $0.25$. It can be seen the boundary layer edge is roughly at 1.2mm height. Beyond that height, the primary velocities became constant and the crossflow velocities vanish quickly. Based on this base flow, the designed body force distribution is shown in figure \ref{f:forceshape} and the corresponding constants are listed in table \ref{t:constantsPmodel}. The coefficient $c_{\rm force}$ controls the force strength and 3 different values are adopted to investigate the force strength effect. Figure \ref{f:forceshape} only shows the one with $c_{\rm force}=30$. In the other two cases, shapes of the distribution are the same and only the values are all increased proportionally. The body force is distributed under 1.2mm and the spread length in z direction is less than 2.5mm, which is nearly the half of the target mode's wavelength. The maximum force density is 2986, 3981 and 4976 N/m$^3$ when $c_{\rm force}$ is 30, 40 and 50, respectively. The total force, obtained by integrating over the whole plane, is 1.467,1.956 and 2.446$\times 10^{-3}$ N/m, respectively.
+
+The actuators with previously described body force distribution are utilized to attenuate the crossflow instability. To hinder the crossflow vortices directly, one actuator per wavelength is positioned. The distribution of the dimensionless force, $f$, in $X-Z$ plane at $y=0.1$mm is shown in figure \ref{f:force_XZ_1perwavelength}. All the electrodes are parallel to the isophasal lines of the primary crossflow instability mode. The spanwise distance of each two neighbouring actuators is just the wavelength of the primary mode. The control region starts at 23.7\% cord length and ends at 26.2\% cord length. In this case, the $c_{\rm force}$ is 30. 10 different actuators' spanwise locations are examined to find the optimal one. Unfortunately, the flow dose not always became stable in all the cases. Some even promote the transition. Figure \ref{f:bestworst} shows the evolution of the fundamental modes form the best case and the worst case. The black curve denotes the case without control and the green and red is the best and the worst case, respectively. Here, $Tz$ is the fundamental spanwise wavelength and $z_0$ is the spanwise coordinate of the central point of the first actuator. The control region is indicated by two vertical blue lines. When the actuators are at $z_0/T_z=0.4$, the primary mode is weakened in the control region and its amplitude is lower than the one without control downstream. However, When the actuators are at $z_0/T_z=0.9$, which is just half wave length away from the formal best case, the primary instability mode is promoted. The amplitude increase dramatically in the control region and become much higher than the case without control.
+
+Figure \ref{f:thebest} and \ref{f:theworst} depict the actuator locations relative to the instability disturbance. The colors denote the body force and the iso-lines indicate the  disturbance velocities. All the force and the velocities are projected into the direction perpendicular to the crossflow vortex. It can be seen when the force and the local disturbance have the same sign, like figure \ref{f:theworst} in which both of them are negative, the instability is promoted. On the contrary, when the force overlaps on the disturbance velocity which has the opposite direction, see figure \ref{f:thebest}, the disturbance will be damped and thus the instability will be attenuated. This result implies that the spanwise position is critical and unfavorable position even leads to stronger disturbance which may bring the transition more upstream. When this control method is applied on a real plane, It is inevitable to locate all the crossflow vortices and that will be a tremendous challenge. Hence, from authors' view, this method do not have enough applicability.
+\begin{table}
+\caption{Constants in the plasma model}\label{t:constantsPmodel}
+\begin{ruledtabular}
+%\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccccc}
+\begin{tabular}{ccccccc}
+%  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  $a_0$ & $a_1$ & $a_2$ & $b_0$ & $b_1$ & $b_2$ & $c_{\rm force}$ \\\hline
+  2.0 & 0.08 & 0.001 & 7.76 & 2.1 & 1.8 & 30,50,70 \\
+%  \hline
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+%\begin{table}
+%\caption{\label{tab:table1} Transitions selected for thermometry}
+%\begin{ruledtabular}
+%\begin{tabular}{lcccccc}
+%& Transition& & \multicolumn{2}{c}{}\\\cline{2-2}
+%Line& $\nu \prime\prime $& & \textit{J}$\prime\prime $& Frequency, cm$^{-1}$& \textit{FJ}, cm$^{-1}$& \textit{G}$\nu $, cm$^{-1}$\\\hline
+%a& 0& P$_{12}$& 2.5& 44069.416& 73.58& 948.66\\
+%b& 1& R$_{2}$& 2.5& 42229.348& 73.41& 2824.76\\
+%c& 2& R$_{21}$& 805& 40562.179& 71.37& 4672.68\\
+%d& 0& R$_{2}$& 23.5& 42516.527& 1045.85& 948.76\\
+%\end{tabular}
+%\end{ruledtabular}
+%\end{table}
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.48\textwidth]{Ut(ScaledWithUinf)} \includegraphics[width=0.48\textwidth]{Wt(ScaledWithUinf)}
+  \caption{The primary velocity profiles (left) and the crossflow (secondary) velocity profiles (right)}%
+  \label{f:BLvelocityprofile}
+\end{figure}
+
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.8\textwidth]{abs(bodyforce)}
+  \caption{The distribution of the body force induced by one plasma actuators}%
+  \label{f:forceshape}
+\end{figure}
+
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.6\textwidth]{bodyforceXZ(y=0_1mm)}
+  \caption{The distribution of the body force in X-Z plane (one actuator per wavelength)}%
+  \label{f:force_XZ_1perwavelength}
+\end{figure}
+
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.6\textwidth]{Vmax_compare(scaledUe)-improved}
+  \caption{The amplitude of the fundamental modes with actuators put at different spanwise location}%
+  \label{f:bestworst}
+\end{figure}
+
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=\textwidth]{force-position-wt(scaledUinf)_z0=04}
+  \caption{Relative position of the body force and the crossflow-wise disturbance velocity in the case $z_0/Tz=0.4$}%
+  \label{f:thebest}
+\end{figure}
+
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=\textwidth]{force_position_wt(scaledUinf)_z0=09}
+  \caption{Relative position of the body force and the crossflow-wise disturbance velocity in the case $z_0/Tz=0.9$}%
+  \label{f:theworst}
+\end{figure}
+
+
+\subsection{Control scheme 2: two actuators per wave length}\label{subs:control2}
+Since it have been known that the magnitude of crossflow velocity have an great influence on the crossflow instability, another idea is to attenuate the crossflow velocity using the plasma actuators. To avoid exciting the primary mode, two actuators per wavelength are positioned. The body force distribution in X-Z plane is shown in figure \ref{f:force2perwavelength}. The number of plasma actuators are doubled. The control region starts at 18.7\% cord length and ends at 21.2\%cord length. Electrodes are still parallel to the isophasal curves of the primary instability mode. $c_{force}$ is 50 in the first case and the cases with the $c_{force}=30,70$ will be shown latter.
+
+Figure \ref{f:basecase} shows the evolution of modes'energy, Red curves stand for the controlled case and the black for the uncontrolled case. The right figure uses normal coordinate and the left uses logarithmic coordinate to show those harmonics more clearly. Again, the control region is denoted by two blue vertical lines in both figures and the center of the region is at 20\% cord length. Since the distance between two neighbouring actuators is half of the fundamental wavelength, the harmonic mode (0,2), whose wavelength is also half of the fundamental wavelength, is excited directly. It can be seen there is small peak just at the end of the control region. When the mode gets out of the control region, its energy deceases quickly and at 30\% cord length its energy is two orders of magnitude lower than the peak value. The reason of this energy decline is that this mode with 2.5mm wavelength is predicted to be stable by the e${\rm N}$ method and that means it will die out soon without plasma stimulation. The behaviors of other harmonics, the mode (0,3) to (0,5) and all the higher order harmonics which are not shown, are all similar with the mode (0,2). However, in the middle section of the wing, from 30\% to 40\% cord length, all the modes are weaker than their counterparts from the case without control. 
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.6\textwidth]{bodyforce_Forshowy=0_1mm(twoactuators)}
+  \caption{The distribution of the body force in X-Z plane (two actuators per wavelength)}%
+  \label{f:force2perwavelength}
+\end{figure}
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+  \subfigure[]{
+    \label{f:basecase_a}
+    \includegraphics[width=0.48\textwidth]{compare_modes_energy(scaledUinf)1-improved}}
+  \subfigure[]{
+    \label{f:basecase_b}
+    \includegraphics[width=0.48\textwidth]{compare_modes_energy(scaledUinf)2-improved}}
+  \caption{Evolution of modes' energy with and without control}%
+  \label{f:basecase}
+\end{figure}
+
+\begin{figure}
+\centering
+\subfigure[]{           %
+\label{fig:ContU0216WOC} %% label for first subfigure
+\includegraphics[width=0.48\linewidth]{XC=0216(scaledUinf)WOC}}
+%\hspace{0.0in}
+\subfigure[]{
+\label{fig:ContU0216WC} %% label for second subfigure
+\includegraphics[width=0.48\linewidth]{XC=0216(scaledUinf)WC}}
+\caption{Contour of streamwise velocity at $X/C$=0.216 without (a) and with (b) control}
+\label{fig:ContU0216} %% label for entire figure
+\end{figure}
+
+\begin{figure}
+\centering
+\subfigure[]{           %
+\label{fig:ContU0350WOC} %% label for first subfigure
+\includegraphics[width=0.48\linewidth]{XC=035(scaledUinf)WOC}}
+%\hspace{0.0in}
+\subfigure[]{
+\label{fig:ContU0350WC} %% label for second subfigure
+\includegraphics[width=0.48\linewidth]{XC=035(scaledUinf)WC}}
+\caption{Contour of streamwise velocity at $X/C$=0.35 without (a) and with (b) control}
+\label{fig:ContU0350} %% label for entire figure
+\end{figure}
+\clearpage %REMEMBER TO DELATE THIS AFTER YOU ADD ALL WORDS IN THIS PAPER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Figure \ref{fig:ContU0216} and \ref{fig:ContU0350} show the contours of streamwise velocity at $X/C=0.216$ and 0.35, respectively. At $X/C=0.216$, which is close to the end of the control region $X/C=0.212$, the boundary layer looks quite and clean when there is no control. The instability modes are considerably weak there. While the plasma is induced, small waves are generated which can be seen in figure \ref{fig:ContU0216WC}. These small waves are mainly caused by the mode (0,2) and their wavelength is 2.5mm. At 35\% cord length, in the case without control, a strong crossflow vortex appears and it convects low momentum fluid away from the wall into higher level. A rollover structure which indicates the beginning of the saturate stage also appears. However, in the controlled case, there are only small ripples and no strong convection emerges. From these figures, it can be concluded that even though the plasma actuators do not affect the primary mode directly, their aftermath finally hinder the evolution of crossflow vortices.
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+\includegraphics[width=0.24\textwidth]{compare_Wt_XC=025(scaledUinf)2}
+\includegraphics[width=0.24\textwidth]{compare_Wt_XC=030(scaledUinf)2}
+\includegraphics[width=0.24\textwidth]{compare_Wt_XC=035(scaledUinf)2}
+\includegraphics[width=0.24\textwidth]{compare_Wt_XC=040(scaledUinf)2}
+\caption{Crossflow velocity profiles}%
+\label{f:CFprofiles}
+\end{figure}
+
+Figure \ref{f:CFprofiles} shows the crossflow velocity profiles at different streamwise locations. The blue curves are the crossflow velocity profile of the baseflow. The black curves come from the uncontrolled case and they deviate from the baseflow's profile due to the mean flow distortion mode, namely the (0,0) mode. The red curves are from the controlled case. It can be observed that at $X/C=0.25$ the black curve coincides with the blue one, because all the disturbance modes including the mean flow distortion mode (0,0) are weak there. Meanwhile, since the plasma induced body force's direction is just opposite of the crossflow velocity's, the profile in the controlled case is lower than the other two. The situation is similar at $X/C=0.3$. The controlled crossflow profile grows marginally, but it is still lower than the other two. From 25\% to 30\% cord length, all the instability modes in the controlled case grow slower than their counterpart in uncontrolled case and some of them even shrink, see figure \ref{f:basecase_b}. That's mainly attributed to the decrease of the crossflow velocity profile. At 35\% and 40\% cord length, arising nonlinearity effect promotes the distortion of mean flow and decline the crossflow in the uncontrolled case. However, since the development of these instability modes are hindered in the controlled case, the nonlinearity is not significant and thus the distortion of baseflow in controlled case is not as intense as that in the case without control. Then, the controlled crossflow become stronger than that without control as seen in the last picture of figure \ref{f:CFprofiles}.
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+\includegraphics[width=0.48\textwidth]{(scaledUinf)Amp0=1e-4_c_force=VARYING_X0C=020_dzdTz=00_Nplasma=2-improved}
+\includegraphics[width=0.48\textwidth]{(scaledUinf)Amp0=1e-4_c_force=VARYING_X0C=020_dzdTz=00_Nplasma=2___zoomin-improved}
+\caption{Evolution of modes' energy with different body force strength}%
+\label{f:forcestrength}
+\end{figure}
+
+The force strength effect is studied by varying the coefficient $c_{\rm force}$ and the results are shown in figure \ref{f:forcestrength}. The right figure is just the magnification of the vicinity of the control region. The orange, red and green curves denote the cases with $c_{\rm force}=30,50,70$, respectively. In all controlled cases, the energy of primary modes and (0,2) modes are all lower than that without control and stronger body force results in weaker instability modes. The stronger body force also leads to higher peak value of the energy of the harmonic (0,2) mode near the end of the control region. It can be seen the peak values are $2 \times 10^{-4}$, $8 \times 10^{-4}$ and  $2 \times 10^{-3}$ for the cases with $c_{\rm force}=30,50,70$, respectively. 
+
+Figure \ref{f:streamwiselocationeffect} compares the results of cases with actuators located at different streamwise locations. The green, red and orange curves stand for the cases with DBDs' center located at 15\%, 20\% and 25\% cord length. The control regions are not plotted in the figure, but they still can be recognized by the small peaks on the dashed curves denoting the (0,2) mode, because like all the other cases shown previously, at the vicinity of the control region the (0,2) modes are all excited. The peak of mode (0,2) in the case with excitation at 15\% cord length is lower than that at 20\% cord length which in turn is lower than that at 25\% cord length. The reason is that the amplitude of the natural original (0,2) mode is bigger at upstream and thus, when it is excited by the same force, the originally stronger mode reaches a relatively higher level. From 30\% to 40\% cord length, all the modes energy of the case controlled at 15\% cord length are lower than their counterparts from the other two cases. The primary mode controlled by the DBD actuators at 25\% cord length does not deviate from the primary mode without control until 33\% cord length. Fortunately, its energy decreases after that. No matter where the actuators are put, all the modes' energy is lower than the originals without control.
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+\includegraphics[width=0.48\textwidth]{(scaledUinf)Amp0=1e-4_c_force=50_X0C=VARYING_dzdTz=00_Nplasma=2-improved}
+\includegraphics[width=0.48\textwidth]{(scaledUinf)Amp0=1e-4_c_force=50_X0C=VARYING_dzdTz=00_Nplasma=2____zoomin-improved}
+\caption{Evolution of modes' energy with plasma actuators at different streamwise locations}%
+\label{f:streamwiselocationeffect}
+\end{figure}
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+\includegraphics[width=0.48\textwidth]{(scaledUinf)Amp0=1e-4_c_force=50_X0C=020_dzdTz=VARYING_Nplasma=2-improved}
+\includegraphics[width=0.48\textwidth]{(scaledUinf)Amp0=1e-4_c_force=50_X0C=020_dzdTz=VARYING_Nplasma=2___zoomin-improved}
+\caption{Evolution of modes' energy with plasma actuators at different spanwise location}%
+\label{f:spanwiselocationeffect}
+\end{figure}
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+\includegraphics[width=0.24\textwidth]{XC=025_Modified_baseflow(scaledUinf)-z0Tz=025}
+\includegraphics[width=0.24\textwidth]{XC=030_Modified_baseflow(scaledUinf)-z0Tz=025}
+\includegraphics[width=0.24\textwidth]{XC=035_Modified_baseflow(scaledUinf)-z0Tz=025}
+\includegraphics[width=0.24\textwidth]{XC=040_Modified_baseflow(scaledUinf)-z0Tz=025}
+\caption{Comparison of modified mean flow profiles with plasma actuators installed at different spanwise location}%
+\end{figure}
+
+In section \ref{subs:control1}, it has already been known that the results of the control with one plasma actuator per wavelength are remarkably sensitive to the spanwise location of the actuators. Whether this control method with two actuators per wavelength is sensitive to the spanwise location is examined here and the results are shown in figure \ref{f:spanwiselocationeffect}. Since the wavelength of the array of plasma actuators is half of the fundamental wavelength, $T_z$, the actuators are moved one forth of the fundamental wavelength to reverse the phase in spanwise direction. 
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+\includegraphics[width=0.6\textwidth]{force_XZ(scaledUinf)-reversed}
+\caption{Body force distribution of reversed plasma actuators in X-Z plane}%
+\end{figure}
+
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+\includegraphics[width=0.48\textwidth]{(scaledUinf)Amp0=1e-4_c_force=50_X0C=020_dzdTz=VARYING_Nplasma=2_revers-improved}
+\includegraphics[width=0.48\textwidth]{(scaledUinf)Amp0=1e-4_c_force=50_X0C=020_dzdTz=VARYING_Nplasma=2_revers___zoomin-improved}
+\caption{Evolution of modes' energy with plasma actuators at different spanwise location}%
+\end{figure}
+
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+\includegraphics[width=0.32\textwidth]{XC=025_Modified_baseflow_reversed(scaledUinf)}
+\includegraphics[width=0.32\textwidth]{XC=030_Modified_baseflow_reversed(scaledUinf)}
+\includegraphics[width=0.32\textwidth]{XC=035_Modified_baseflow_reversed(scaledUinf)}
+\caption{Evolution of modes' energy with plasma actuators at different spanwise location}%
+\end{figure}
+
+\begin{figure}
+\centering
+  % Requires \usepackage{graphicx}
+\includegraphics[width=0.6\textwidth]{(scaledUinf)Amp0=1e-4_c_force=70_X0C=VARYING_dzdTz=0000_Nplasma=3-improved}
+\caption{Evolution of modes' energy in cases targeted 7.5mm wavelength mode}%
+\end{figure}
+
+
+
+
+
+
+\section{Conclusion}
+Waiting to be completed......
+
+\section*{Appendix}
+
+An Appendix, if needed, appears before the acknowledgments.
+
+
+\clearpage %REMEMBER TO DELATE THIS AFTER YOU ADD ALL WORDS IN THIS PAPER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\section*{Acknowledgments}
+This work was supported by the National Key Basic Research Program of China (2014CB744801), the EU-China Joint Projects DRAGY (690623), the NSFC Grants 11572176, 51376106 \& 11272183, and the Tsinghua University initiative Scientific Research Program (2014z21020).
+
+\section*{References}
+\bibliographystyle{aiaa}
+\bibliography{SCI_2}
+
+\end{document}
+
