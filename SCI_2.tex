@@ -11,7 +11,7 @@
 \title{Control of crossflow instability over a swept wing using DBD plasma actuators}
 
 \author{Zhefu Wang\footnote{Phd Candidate, School of aerospace engineering, Tsinghua University, wangzf13@mails.tsinghua.edu.cn, and AIAA student member.} and Song Fu\footnote{Professor, School of aerospace engineering, Tsinghua University, fs-dem@tsinghua.edu.cn, and AIAA member.}}
-\affiliation{Tsinghua University, Beijing, P.R.China, 100084}
+\affiliation{School of aerospace engineering, Tsinghua University, Beijing, P.R.China, 100084}
 %\author{Third C. Author\footnote{Insert Job Title, Department Name, Address/Mail Stop, and AIAA Member Grade (if any) for third author.}}
 %\affiliation{Business or Academic Affiliation 2, City, Province, Zip Code, Country}
 %\author{Fourth D. Author\footnote{Insert Job Title, Department Name, Address/Mail Stop, and AIAA Member Grade (if any) for fourth author (etc.).}}
@@ -28,13 +28,13 @@ Nonlinear parabolized stability equations are used to provide a computational as
 \section*{Nomenclature}
 (Nomenclature entries should have the units identified)\\
 \noindent\begin{tabular}{@{}lcl@{}}
-X,Y,Z                 &=& Orthogonal curvilinear coordinates \\
+$X,Y,Z$                 &=& Orthogonal curvilinear coordinates \\
 $x,y,z$               &=& Orthogonal curvilinear coordinates, in millimeters \\
-$u,v,w$               &=& Total velocity component in X,Y,Z directions \\
-$u_0,v_0,w_0$         &=& Baseflow velocity component in X,Y,Z directions \\
+$u,v,w$               &=& Total velocity component in $X,Y,Z$ directions \\
+$u_0,v_0,w_0$         &=& Baseflow velocity component in $X,Y,Z$ directions \\
 $\rho$                &=& Total density \\
 $T$                   &=& Total temperature \\
-$u',v',w'$            &=& Disturbance velocity component in X,Y,Z directions \\
+$u',v',w'$            &=& Disturbance velocity component in $X,Y,Z$ directions \\
 $\mathbf{q}$          &=& The vector that consists of total density, velocity and temperature \\
 $\mathbf{q_0}$        &=& The vector that consists of baseflow quantities \\
 $\mathbf{\tilde{q}}$  &=& The vector that consists of disturbance quantities \\
@@ -74,7 +74,7 @@ In Maden's model, the wall-normal component of the body force is neglected becau
 \end{equation}
 \begin{equation}
     \label{e:madenY}
-    Y(y)=(b_1x+b_2x^2){\rm exp}(-b_0y^{2/5}),y>0
+    Y(y)=(b_1y+b_2y^2){\rm exp}(-b_0y^{2/5}),y>0
 \end{equation}
 \begin{equation}
     \label{e:maden}
@@ -361,9 +361,9 @@ Figure \ref{f:thebest} and \ref{f:theworst} depict the actuator locations relati
 
 
 \subsection{Control scheme 2: two actuators per wave length}\label{subs:control2}
-Since it have been known that the magnitude of crossflow velocity have an great influence on the crossflow instability, another idea is to attenuate the crossflow velocity using the plasma actuators. To avoid exciting the primary mode, two actuators per wavelength are positioned. The body force distribution in X-Z plane is shown in figure \ref{f:force2perwavelength}. The number of plasma actuators are doubled. The control region starts at 18.7\% cord length and ends at 21.2\%cord length. Electrodes are still parallel to the isophasal curves of the primary instability mode. $c_{force}$ is 50 in the first case and the cases with the $c_{force}=30,70$ will be shown latter.
+Since it has been known that the magnitude of crossflow velocity greatly influences the crossflow instability, another idea is to attenuate the crossflow velocity using the plasma actuators. To avoid exciting the primary mode, two actuators per wavelength are positioned. The body force distribution in X-Z plane is shown in figure \ref{f:force2perwavelength}. The number of plasma actuators are doubled. The control region starts at 18.7\% cord length and ends at 21.2\%cord length. Electrodes are still parallel to the isophasal curves of the primary instability mode. $c_{force}$ is 50 in the first case and the cases with the $c_{force}=30,70$ will be shown latter.
 
-Figure \ref{f:basecase} shows the evolution of modes'energy, Red curves stand for the controlled case and the black for the uncontrolled case. The right figure uses normal coordinate and the left uses logarithmic coordinate to show those harmonics more clearly. Again, the control region is denoted by two blue vertical lines in both figures and the center of the region is at 20\% cord length. Since the distance between two neighbouring actuators is half of the fundamental wavelength, the harmonic mode (0,2), whose wavelength is also half of the fundamental wavelength, is excited directly. It can be seen there is small peak just at the end of the control region. When the mode gets out of the control region, its energy deceases quickly and at 30\% cord length its energy is two orders of magnitude lower than the peak value. The reason of this energy decline is that this mode with 2.5mm wavelength is predicted to be stable by the e${\rm N}$ method and that means it will die out soon without plasma stimulation. The behaviors of other harmonics, the mode (0,3) to (0,5) and all the higher order harmonics which are not shown, are all similar with the mode (0,2). However, in the middle section of the wing, from 30\% to 40\% cord length, all the modes are weaker than their counterparts from the case without control. 
+Figure \ref{f:basecase} shows the evolution of modes' energy. Red curves stand for the controlled case and the black for the uncontrolled case. The right figure uses normal coordinate and the left uses logarithmic coordinate to show those harmonics more clearly. Again, the control region is denoted by two blue vertical lines in both figures and the center of the region is at 20\% cord length. Since the distance between two neighbouring actuators is half of the fundamental wavelength, the harmonic mode (0,2), whose wavelength is also half of the fundamental wavelength, is excited directly. It can be seen there is small peak just at the end of the control region. When the mode gets out of the control region, its energy deceases quickly and at 30\% cord length its energy is two orders of magnitude lower than the peak value. The reason of this energy decline is that this mode with 2.5mm wavelength is predicted to be stable by the e$^{\rm N}$ method and that means it will die out soon without plasma stimulation. The behaviors of other harmonics, the mode (0,3) to (0,5) and all the higher order harmonics which are not shown, are all similar with the mode (0,2). However, in the middle section of the wing, from 30\% to 40\% cord length, all the modes are weaker than their counterparts from the case without control.
 \begin{figure}
 \centering
   % Requires \usepackage{graphicx}
@@ -432,7 +432,7 @@ Figure \ref{f:CFprofiles} shows the crossflow velocity profiles at different str
 \label{f:forcestrength}
 \end{figure}
 
-The force strength effect is studied by varying the coefficient $c_{\rm force}$ and the results are shown in figure \ref{f:forcestrength}. The right figure is just the magnification of the vicinity of the control region. The orange, red and green curves denote the cases with $c_{\rm force}=30,50,70$, respectively. In all controlled cases, the energy of primary modes and (0,2) modes are all lower than that without control and stronger body force results in weaker instability modes. The stronger body force also leads to higher peak value of the energy of the harmonic (0,2) mode near the end of the control region. It can be seen the peak values are $2 \times 10^{-4}$, $8 \times 10^{-4}$ and  $2 \times 10^{-3}$ for the cases with $c_{\rm force}=30,50,70$, respectively. 
+The force strength effect is studied by varying the coefficient $c_{\rm force}$ and the results are shown in figure \ref{f:forcestrength}. The right figure is just the magnification of the vicinity of the control region. The orange, red and green curves denote the cases with $c_{\rm force}=30,50,70$, respectively. In all controlled cases, the energy of primary modes and (0,2) modes are all lower than that without control and stronger body force results in weaker instability modes. The stronger body force also leads to higher peak value of the energy of the harmonic (0,2) mode near the end of the control region. It can be seen the peak values are $2 \times 10^{-4}$, $8 \times 10^{-4}$ and  $2 \times 10^{-3}$ for the cases with $c_{\rm force}=30,50,70$, respectively.
 
 Figure \ref{f:streamwiselocationeffect} compares the results of cases with actuators located at different streamwise locations. The green, red and orange curves stand for the cases with DBDs' center located at 15\%, 20\% and 25\% cord length. The control regions are not plotted in the figure, but they still can be recognized by the small peaks on the dashed curves denoting the (0,2) mode, because like all the other cases shown previously, at the vicinity of the control region the (0,2) modes are all excited. The peak of mode (0,2) in the case with excitation at 15\% cord length is lower than that at 20\% cord length which in turn is lower than that at 25\% cord length. The reason is that the amplitude of the natural original (0,2) mode is bigger at upstream and thus, when it is excited by the same force, the originally stronger mode reaches a relatively higher level. From 30\% to 40\% cord length, all the modes energy of the case controlled at 15\% cord length are lower than their counterparts from the other two cases. The primary mode controlled by the DBD actuators at 25\% cord length does not deviate from the primary mode without control until 33\% cord length. Fortunately, its energy decreases after that. No matter where the actuators are put, all the modes' energy is lower than the originals without control.
 \begin{figure}
@@ -459,22 +459,30 @@ Figure \ref{f:streamwiselocationeffect} compares the results of cases with actua
 \includegraphics[width=0.24\textwidth]{XC=035_Modified_baseflow(scaledUinf)-z0Tz=025}
 \includegraphics[width=0.24\textwidth]{XC=040_Modified_baseflow(scaledUinf)-z0Tz=025}
 \caption{Comparison of modified mean flow profiles with plasma actuators installed at different spanwise location}%
+\label{f:Wt_SpVar}
 \end{figure}
 
-In section \ref{subs:control1}, it has already been known that the results of the control with one plasma actuator per wavelength are remarkably sensitive to the spanwise location of the actuators. Whether this control method with two actuators per wavelength is sensitive to the spanwise location is examined here and the results are shown in figure \ref{f:spanwiselocationeffect}. Since the wavelength of the array of plasma actuators is half of the fundamental wavelength, $T_z$, the actuators are moved one forth of the fundamental wavelength to reverse the phase in spanwise direction. 
+In section \ref{subs:control1}, it has already been known that the results of the control with one plasma actuator per wavelength are remarkably sensitive to the spanwise location of the actuators. Whether this control method with two actuators per wavelength is sensitive to the spanwise location is examined here and the results are shown in figure \ref{f:spanwiselocationeffect}. Since the wavelength of the array of plasma actuators is half of the fundamental wavelength, $T_z$, the actuators are moved one forth of the fundamental wavelength to reverse the phase in spanwise direction. The red curves stand for the case shown before and the green curves represent the new case with actuators spanwise location shifted. Again, the energy of (0,2) mode increased in the control region and decreased whereafter. The energy of (0,1) modes in both cases kept the same in the control region. However, they began to deviate from each other just slightly downstream of the control region. From 25\% to 45\% cord length, there was only mildly difference between these two curves. In addition, both of them are below the black curve, the one without control, indicating that the spanwise locations of actuators are not crucial.
+
+To figure out whether the slight difference between the primary modes from the cases with and without actuators' spanwise location shift was caused by the crossflow velocity alteration, the mean flow profiles in crossflow direction are compared in figure \ref{f:Wt_SpVar}. The blue curves and the red curves denote the mean crossflow velocity profiles in the cases with and without actuators spanwise shift, respectively. At 25\% and 30\% cord length, the red curves superposed on the blue curves perfectly. Recalling that at these two streamwise location, the energy of the primary modes have already deviate from each other. Hence, the conclusion is that the difference of the (0,1) modes in the two cases was not caused by the mean crossflow velocity profile.
 \begin{figure}
 \centering
   % Requires \usepackage{graphicx}
 \includegraphics[width=0.6\textwidth]{force_XZ(scaledUinf)-reversed}
 \caption{Body force distribution of reversed plasma actuators in X-Z plane}%
+\label{f:force_reversed}
 \end{figure}
 
+So far, It is clear that the manipulation of (0,0) mode \cite{Saric1998} or (0,2) mode can result in a decrease of the primary mode's energy. In this presented DBD plasma actuators control scheme, the (0,0) and (0,2) modes are both altered directly and the primary mode was only affected downstream of the control region. Which mode, (0,0) or (0,2), contributes more to the decline of the primary mode's energy is not clear. To answer this question, an inverse control case was set. All the DBD actuators were turned 180$^\circ$ and then the body force was in the opposite direction. In the computation, the force appears as a source term. When analysing each mode, the force term was decomposed into Fourier series with respect to spanwise coordinate. These Fourier components affect corresponding instability modes. For instant, the zeroth order Fourier component affects the (0,0) mode directly and the second affects the (0,2). In this inverse control, the sign of the force term and its Fourier component switched. Due to the feature of trigonometric function, the sign switch of the second Fourier component is equal to a phase shift. This phase shift effect had investigated above by comparing the results with actuators at different spanwise locations. It has been proved insignificant. Thus, the greatest difference in this reverse control is that the sign of the force term corresponding to the (0,0) was switched. If this reversed control still works and reduce the primary mode's energy, the (0,2) mode rather than (0,0) mode would play an more important role in our control scheme. Otherwise, the conclusion should be the (0,0) mode was more important.
+
+The body force distribution in $X$-$Z$ plane is shown in figure \ref{f:force_reversed}. The evolution of modes' energy in inverse control cases is shown in figure \ref{f:model_energy_revers}. As mentioned above, the force direction inversion will also lead to a phase shift of the Fourier component corresponding to (0,2) mode. This phase shift can be achieved by moving the actuators in spanwise direction. To eliminate this small ambiguity, actuators located at $Z_0/T_z=0.0$ and $Z_0/T_z=0.25$ are both simulated. It can be seen in both cases the energy of the primary modes are higher than that with control. Also, the actuators' spanwise location effect was not significant and this agrees well with the conclusion made above (figure \ref{f:Wt_SpVar}). This result indicates that the (0,0) mode is more important than the (0,2) mode and it is the main reason of the decline of the primary mode's energy.
 \begin{figure}
 \centering
   % Requires \usepackage{graphicx}
 \includegraphics[width=0.48\textwidth]{(scaledUinf)Amp0=1e-4_c_force=50_X0C=020_dzdTz=VARYING_Nplasma=2_revers-improved}
 \includegraphics[width=0.48\textwidth]{(scaledUinf)Amp0=1e-4_c_force=50_X0C=020_dzdTz=VARYING_Nplasma=2_revers___zoomin-improved}
-\caption{Evolution of modes' energy with plasma actuators at different spanwise location}%
+\caption{Evolution of modes' energy in reversed control cases (actuators at two different locations)}%
+\label{f:model_energy_revers}
 \end{figure}
 
 \begin{figure}
@@ -483,17 +491,20 @@ In section \ref{subs:control1}, it has already been known that the results of th
 \includegraphics[width=0.32\textwidth]{XC=025_Modified_baseflow_reversed(scaledUinf)}
 \includegraphics[width=0.32\textwidth]{XC=030_Modified_baseflow_reversed(scaledUinf)}
 \includegraphics[width=0.32\textwidth]{XC=035_Modified_baseflow_reversed(scaledUinf)}
-\caption{Evolution of modes' energy with plasma actuators at different spanwise location}%
+\caption{mean crossflow profile in the inverse control case}%
+\label{f:inverse_meanflow}
 \end{figure}
 
+Figure \ref{f:inverse_meanflow} gives the mean crossflow velocity profiles at different streamwise location in the inverse control case. It is obvious the crossflow was enhanced at 25\% cord length where is just downstream of the control region. Thereafter, the crossflow fall back and finally get back to the same level with the case without control. From this result, it can be concluded that the crossflow velocity affects the crossflow instability significantly. When the crossflow was weaken by the actuator, the instability was attenuated. Otherwise, the instability would be intensified.
 \begin{figure}
 \centering
   % Requires \usepackage{graphicx}
 \includegraphics[width=0.6\textwidth]{(scaledUinf)Amp0=1e-4_c_force=70_X0C=VARYING_dzdTz=0000_Nplasma=3-improved}
 \caption{Evolution of modes' energy in cases targeted 7.5mm wavelength mode}%
+\label{f:7.5mm}
 \end{figure}
 
-
+All the simulation shown above assumes the mode with 5mm spanwise wavelength dominates the transition and the 2.5mm mode, which happens to be the (0,2) mode with respect to the 5mm fundamental wavelength. Here, another situation was considered. In this situation, the 7.5mm mode becomes the dominate mode, but the distance between two neighbouring actuator is still 2.5mm. Thus, the control mode is the (0,3) mode. Plasma actuators are located at 3 different streamwise location and the evolution of modes' energy is shown in figure \ref{f:7.5mm}. The green, red, orange curves represent the cases controlled at 15\%, 20\% and 25\% cord length. The small peak of the energy of the (0,3) mode, namely the control mode, becomes higher and higher when the actuators move downstream. Fortunately, all the modes in all the controlled cases weaker than those in uncontrolled case downstream of 30\% cord length. This result proves that the presented control method performs well even in an un-designed case.
 
 
 
