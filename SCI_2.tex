@@ -10,8 +10,8 @@
 
 \title{Control of crossflow instability over a swept wing using Dielectric-Barrier-Discharge plasma actuators}
 
-\author{Zhefu Wang\footnote{Phd Candidate, School of aerospace engineering, Tsinghua University, wangzf13@mails.tsinghua.edu.cn, and AIAA student member.} and Song Fu\footnote{Professor, School of aerospace engineering, Tsinghua University, fs-dem@tsinghua.edu.cn, and AIAA member.}}
-\affiliation{School of aerospace engineering, Tsinghua University, Beijing, P.R.China, 100084}
+\author{Zhefu Wang\footnote{Phd Candidate, School of Aerospace Engineering, Tsinghua University, wangzf13@mails.tsinghua.edu.cn, and AIAA student member.} and Song Fu\footnote{Professor, School of aerospace engineering, Tsinghua University, fs-dem@tsinghua.edu.cn, and AIAA member.}}
+\affiliation{School of Aerospace Engineering, Tsinghua University, Beijing, P.R.China, 100084}
 %\author{Third C. Author\footnote{Insert Job Title, Department Name, Address/Mail Stop, and AIAA Member Grade (if any) for third author.}}
 %\affiliation{Business or Academic Affiliation 2, City, Province, Zip Code, Country}
 %\author{Fourth D. Author\footnote{Insert Job Title, Department Name, Address/Mail Stop, and AIAA Member Grade (if any) for fourth author (etc.).}}
@@ -25,18 +25,36 @@ In the present study, the stability of the boundary layer over airfoil NLF-0415 
 \maketitle
 
 \section*{Nomenclature}
-(Nomenclature entries should have the units identified)\\
+%(Nomenclature entries should have the units identified)\\
 \noindent\begin{tabular}{@{}lcl@{}}
-$X,Y,Z$                 &=& Orthogonal curvilinear coordinates \\
+$X,Y,Z$               &=& Orthogonal curvilinear coordinates \\
 $x,y,z$               &=& Orthogonal curvilinear coordinates, in millimeters \\
+$x_{\rm PA}$          &=& Streamwise coordinate of plasma location\\
+$f$                   &=& Body force induced by plasma \\
+$c_{\rm force}$       &=& Force strength parameter in plasma model \\
 $u,v,w$               &=& Total velocity component in $X,Y,Z$ directions \\
 $u_0,v_0,w_0$         &=& Baseflow velocity component in $X,Y,Z$ directions \\
 $\rho$                &=& Total density \\
 $T$                   &=& Total temperature \\
+$\rho_{\rm reff}$     &=& Reference density \\
+$U_{\rm reff}$        &=& Reference velocity \\
+$U_{\inf}$            &=& Free stream velocity \\
+$U_{e}$               &=& Velocity at the edge of the boundary layer\\
+$W_t$                 &=& Velocity component in crossflow direction\\
+$\delta_0$            &=& Reference length \\
 $u',v',w'$            &=& Disturbance velocity component in $X,Y,Z$ directions \\
-$\mathbf{q}$          &=& The vector that consists of total density, velocity and temperature \\
-$\mathbf{q_0}$        &=& The vector that consists of baseflow quantities \\
-$\mathbf{\tilde{q}}$  &=& The vector that consists of disturbance quantities \\
+$\mathbf{q}$          &=& Vector that consists of total density, velocity and temperature \\
+$\mathbf{q_0}$        &=& Vector that consists of baseflow quantities \\
+$\mathbf{\tilde{q}}$  &=& Vector that consists of disturbance quantities \\
+$\mathscr{N}$         &=& Operator of Navier-Stokes equation \\
+$\mathscr{L}$         &=& Operator of stability equation \\
+$\beta,\omega$        &=& Fundamental spanwise wave number and fundamental circular frequency\\
+$\alpha$              &=& Complex streamwise wavelength of instability modes\\
+$\lambda$             &=& Spanwise wavelength\\ 
+$m,n$                 &=& Fourier index of harmonic modes\\
+$C_p$                 &=& Pressure coefficient\\
+$C$                   &=& Cord length\\
+
 \end{tabular} \\
 
 %\section{Abstract}
